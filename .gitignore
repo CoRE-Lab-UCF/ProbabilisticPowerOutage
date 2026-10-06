@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Raw and generated data
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Optional local boundaries can be large or separately sourced
+data/boundaries/
+
+# Model/evaluation/figure outputs
+results/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

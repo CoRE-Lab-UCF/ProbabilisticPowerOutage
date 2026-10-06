@@ -1,0 +1,151 @@
+MODELING DATASET SCHEMA
+=======================
+
+File produced by:
+  scripts/build_conus404_outage_dataset.py
+
+Primary modeling file:
+  all_counties_classified_stat_all_days_conus404_4class_p80.csv
+
+Rows
+----
+One row per Florida county-day. The build script keeps days without usable
+EAGLE-I observations and marks them with outage_data_available = 0. Those rows
+may be predicted by the model but are not used for training or evaluation.
+
+Target classes
+--------------
+duration = 0 : no weather-related outage
+duration = 1 : minor, 1 <= outage duration < 2 h
+duration = 2 : moderate, 2 <= outage duration < 8 h
+duration = 3 : major, outage duration >= 8 h
+
+Weather-related filter
+----------------------
+The current public script uses county-specific 80th-percentile thresholds for:
+  WSPD10_cellmax_dmax
+  PREC_ACC_NC_cellmean_dsum
+An outage is retained as weather-related when either variable exceeds its
+county threshold on the outage day or the preceding day.
+
+Identifier / coverage columns
+-----------------------------
+  Time
+  ID
+  county_id
+  county_name
+  outage_data_available
+
+Outcome / diagnostic columns
+----------------------------
+  weather_hours
+  duration_raw_hours
+
+Static county attributes
+------------------------
+  SHDMAX
+  SHDMIN
+  HGT
+  IVGTYP_1_frac
+  IVGTYP_2_frac
+  IVGTYP_5_frac
+  IVGTYP_8_frac
+  IVGTYP_9_frac
+  IVGTYP_10_frac
+  IVGTYP_12_frac
+  IVGTYP_13_frac
+  IVGTYP_14_frac
+  IVGTYP_17_frac
+  IVGTYP_dominant
+  IVGTYP_n_classes
+  IVGTYP_7_frac
+  IVGTYP_11_frac
+  IVGTYP_6_frac
+  IVGTYP_4_frac
+  IVGTYP_16_frac
+  ISLTYP_2_frac
+  ISLTYP_13_frac
+  ISLTYP_14_frac
+  ISLTYP_dominant
+  ISLTYP_n_classes
+  ISLTYP_3_frac
+  ISLTYP_8_frac
+  ISLTYP_12_frac
+  ISLTYP_4_frac
+  ISLTYP_6_frac
+  ISLTYP_16_frac
+  SHD_range
+  county_km2
+
+Final label columns
+-------------------
+  extreme_weather
+  duration_hours
+  duration
+
+Daily weather columns (54)
+-------------------------
+  PREC_ACC_NC_cellmax_dmax
+  PREC_ACC_NC_cellmax_dmean
+  PREC_ACC_NC_cellmax_dsum
+  PREC_ACC_NC_cellmean_dmax
+  PREC_ACC_NC_cellmean_dmean
+  PREC_ACC_NC_cellmean_dsum
+  WSPD10_cellmax_dmax
+  WSPD10_cellmax_dmean
+  WSPD10_cellmean_dmax
+  WSPD10_cellmean_dmean
+  T2_cellmax_dmax
+  T2_cellmax_dmean
+  T2_cellmean_dmax
+  T2_cellmean_dmean
+  SMOIS_TOP_cellmax_dmax
+  SMOIS_TOP_cellmax_dmean
+  SMOIS_TOP_cellmean_dmax
+  SMOIS_TOP_cellmean_dmean
+  MLCAPE_cellmax_dmax
+  MLCAPE_cellmax_dmean
+  MLCAPE_cellmean_dmax
+  MLCAPE_cellmean_dmean
+  GRAUPEL_ACC_NC_cellmax_dmax
+  GRAUPEL_ACC_NC_cellmax_dmean
+  GRAUPEL_ACC_NC_cellmax_dsum
+  GRAUPEL_ACC_NC_cellmean_dmax
+  GRAUPEL_ACC_NC_cellmean_dmean
+  GRAUPEL_ACC_NC_cellmean_dsum
+  PBLH_cellmax_dmax
+  PBLH_cellmax_dmean
+  PBLH_cellmean_dmax
+  PBLH_cellmean_dmean
+  PWAT_cellmax_dmax
+  PWAT_cellmax_dmean
+  PWAT_cellmean_dmax
+  PWAT_cellmean_dmean
+  TD2_cellmax_dmax
+  TD2_cellmax_dmean
+  TD2_cellmean_dmax
+  TD2_cellmean_dmean
+  CANWAT_cellmax_dmax
+  CANWAT_cellmax_dmean
+  CANWAT_cellmean_dmax
+  CANWAT_cellmean_dmean
+  T2_areawtd_dmax
+  T2_areawtd_dmean
+  SMOIS_TOP_areawtd_dmax
+  SMOIS_TOP_areawtd_dmean
+  CANWAT_areawtd_dmax
+  CANWAT_areawtd_dmean
+  TD2_areawtd_dmax
+  TD2_areawtd_dmean
+  PWAT_areawtd_dmax
+  PWAT_areawtd_dmean
+
+Full uploaded dataset used to check this release
+-----------------------------------------------
+Rows: 238,587
+Columns: 97
+Size: 186.1 MiB
+SHA256: c23af7fd01a8072210ea34e48bfa3a35a2fb231683b7a88206f33e621517b624
+
+A small schema/example file with 20 rows from each target class is included at:
+  data/example/modeling_dataset_sample.csv
